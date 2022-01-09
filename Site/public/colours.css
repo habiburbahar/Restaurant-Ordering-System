@@ -1,0 +1,11 @@
+:root {
+	--primary-green: #2D6A4F; /* Light coloured text. */
+	--secondary-green: #74C69D; /* Dark coloured text */
+
+	--neutral-green: #52B788; /* Darkish background colour */
+
+	--quite-light-green: #95D5B2; /* Good for a bright input box */
+	--light-green: #B7E4C7; /* Good for a bright button */
+	--very-light-green: #D8F3DC; /* Can be used as a light text colour */
+	--very-dark-green: #081C15; /* Can be used as a dark text colour */
+}

@@ -1,0 +1,251 @@
+<html>
+	<head>
+		<title>Customer Web Client</title>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="./main.js" defer></script>
+		<link rel="stylesheet" href="../public/colours.css">
+		<link rel="stylesheet" href="./style.css">
+	</head>
+	<body>
+		<div class="maximize" id="app-base">
+
+			<!-- The item modal to add something to the cart -->
+			<div
+				v-if="selectedItem !== null"
+				class="maximize modal-background"
+				@click.self="hideModal()"
+			>
+				<div class="modal-content">
+					<h1 class="center">{{ selectedItem.name }}</h1>
+					<h3>Ingredients:</h3>
+					<p>
+						{{ selectedItem.ingredients.join(", ") }}
+					</p>
+					<div class="quantity-row">
+						<button
+							class="decrement"
+							:disabled="1 >= targetQuantity"
+							@click.stop="targetQuantity--"
+						>
+							<img src="../public/assets/minus.svg" alt="Remove one from quantity">
+						</button>
+						<div class="quantity center"> {{targetQuantity}} </div>
+						<button
+							class="increment"
+							:disabled="targetQuantity >= selectedItem.quantity"
+							@click.stop="targetQuantity++"
+						>
+							<img src="../public/assets/plus.svg" alt="Add one to quantity">
+						</button>
+					</div>
+					<div class="center manage-cart-row">
+						<button
+							class="cancel-item-addition"
+							@click.stop="hideModal()"
+						>
+							Cancel
+						</button>
+						<button
+							class="add-to-order"
+							@click.stop="addToCart()"
+						>
+							Add to Order
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- The modal for adjusting an items quantity when in the cart -->
+			<div
+				v-else-if="editingItem !== null"
+				class="maximize modal-background"
+				@click.self="editCartItem()"
+			>
+				<div class="modal-content">
+					<h1 class="center">{{ editingItem.item.name }}</h1>
+					<h3>Ingredients:</h3>
+					<p>
+						{{ editingItem.item.ingredients.join(", ") }}
+					</p>
+					<div class="quantity-row">
+						<button
+							class="decrement"
+							:disabled="1 >= targetQuantity"
+							@click.stop="targetQuantity--"
+						>
+							<img src="../public/assets/minus.svg" alt="Remove one from quantity">
+						</button>
+						<div class="quantity center"> {{targetQuantity}} </div>
+						<button
+							class="increment"
+							:disabled="targetQuantity >= (editingItem.item.quantity + editingItem.quantity)"
+							@click.stop="targetQuantity++"
+						>
+							<img src="../public/assets/plus.svg" alt="Add one to quantity">
+						</button>
+					</div>
+					<div class="center manage-cart-row">
+						<button
+							class="cancel-item-addition"
+							@click.stop="editCartItem()"
+						>
+							Cancel
+						</button>
+						<button
+							class="add-to-order"
+							@click.stop="updateCart()"
+						>
+							Update Cart
+						</button>
+						<button
+							class="remove-from-order"
+							@click.stop="removeItemFromOrder(editingItem)"
+						>
+							Remove From Order
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- The Payment modal -->
+			<div
+				v-else-if="isPaying"
+				class="maximize modal-background"
+			>
+				<div class="modal-content center">
+					<h1 class="center">Select Payment Method</h1>
+					<button
+						class="payment-method"
+						@click.stop="sendOrder()"
+						:disabled="paymentProcessing"
+					>
+						Credit Card
+					</button>
+					<button
+						class="payment-method"
+						@click.stop="sendOrder()"
+						:disabled="paymentProcessing"
+					>
+						Gold Bars
+					</button>
+					<button
+						class="payment-method"
+						@click.stop="isPaying = false"
+						:disabled="paymentProcessing"
+					>
+						Continue Ordering
+					</button>
+					<button
+						class="payment-method"
+						@click.stop="resetSite()"
+						:disabled="paymentProcessing"
+					>
+						Cancel Order
+					</button>
+					<div
+						class="center"
+						v-if="paymentMessage.length != 0"
+					>
+						{{paymentMessage}}
+					</div>
+				</div>
+			</div>
+
+			<!-- The app's navigation between categories -->
+			<nav id="sidebar">
+				<button
+					class="sidebar-element"
+					v-for="category in categories"
+					:key="category"
+					:class="selectedCategory == category ? `selected` : ``"
+					@click.stop="selectedCategory = category"
+				>
+					<img
+						:src="`../public/assets/${category}.svg`"
+						:alt="`${category} Icon`"
+						width="75"
+						height="75"
+					>
+					{{ toTitleCase(category) }}
+				</button>
+			</nav>
+
+			<!-- The ordering screen that displays all of the items in the category -->
+			<div id="menu" class="main-view" v-if="selectedCategory !== null">
+				<h1 class="center">{{selectedCategory.name}}</h1>
+				<div class="items">
+					<button
+						class="item"
+						v-for="item in menuItems"
+						:key="item.id"
+						:disabled="0 >= item.quantity"
+						@click.stop="selectedItem = item"
+					>
+						<img
+							class="item-preview"
+							:src="itemImage(item)"
+							:alt="`${item.name} Preview Image`"
+						>
+						<span class="item-name center">{{ item.name }}</span>
+						<span class="item-cost center">{{ stringifyPrice(item.cost) }}</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- The main screen that displays when there is no ordering in progress -->
+			<div class="main-view begin-order" v-else>
+				<div>
+					<h3 class="center">Welcome To</h3>
+					<h1 class="center">{{restaurantName}}</h1>
+					<p>
+						Select a category from the left to begin ordering
+					</p>
+				</div>
+			</div>
+
+			<div
+				id="order-view"
+				v-if="selectedCategory !== null"
+			>
+				<div
+					class="order-items"
+				>
+					<div
+						class="item"
+						v-for="orderItem in order"
+					>
+						<button
+							class="maximize"
+							@click.stop="editCartItem(orderItem)"
+						>
+							<img
+								class="item-preview"
+								:src="itemImage(orderItem.item, false)"
+								:alt="`${orderItem.item.name} preview image`"
+							>
+							<br>
+							{{ orderItem.item.name }} x{{ orderItem.quantity }}
+							<br>
+							{{ stringifyPrice(orderItem.quantity * orderItem.item.cost) }}
+						</button>
+					</div>
+				</div>
+				<div class="summary">
+					<div class="total">
+						{{ stringifyPrice(orderTotal) }}
+					</div>
+					<button
+						:disabled="order.length == 0"
+						@click.stop="isPaying = true"
+					>Place Order</button>
+					<button
+						@click.stop="resetSite()"
+					>
+						Cancel Order
+					</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

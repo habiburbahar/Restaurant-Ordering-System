@@ -1,0 +1,489 @@
+TC01:
+	Test Scenario:
+		User selects a category from the list of categories
+	Test Steps:
+		1) The user walks up to the screen
+		2) Sees the welcome screen
+		3) Clicks one of the categories
+	Test Data:
+		Category Clicked = Entrees
+	Expected Results:
+		- The main view changes from the welcome view into the list of entree
+		- The order view appears at the bottom of the screen with the "Place Order"
+			disabled and unable to be clicked.
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC02:
+	Test Scenario:
+		The user clicks anywhere on the welcome screen except one of the categories
+	Test Steps:
+		1) The user walks up to the screen
+		2) Sees the welcome screen
+		3) The user clicks anywhere but a category
+	Test Data:
+		N/A
+	Expected Results:
+		- Nothing happens
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC03:
+	Test Scenario:
+		A user clicks on an in-stock item to order it
+	Test Steps:
+		1) The user finds an item that is in stock that they would like to
+			order from one of the categories
+		2) Click on the item box (image also valid)
+	Test Data:
+		Category = Any category
+		Item = Any in-stock item
+	Expected Results:
+		- The item modal pops up with the ingredients list and the quantity
+			selector.
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC04:
+	Test Scenario:
+		The user clicks on a gray-ed out item to try to order
+	Test Steps:
+		1) Select any category with a gray-ed out item
+		2) Click on the gray-ed out item to bring up the item modal
+	Test Data:
+		Category = Any category with an item that's out of stock
+		Item = Any out-of-stock item
+	Expected Results:
+		- Nothing happens
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC05:
+	Test Scenario:
+		A user clicks on any part of the main menu view that isn't an item
+	Test Steps:
+		1) Select any category
+		2) Click anywhere on the menu view that isn't an item
+	Test Data:
+		Category = Any category
+	Expected Results:
+		- Nothing happens
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC06:
+	Test Scenario:
+		A user clicks the `+` to increase the quantity of an item they are
+		wanting to order
+	Test Steps:
+		1) Select any category
+		2) Select any in-stock item
+		3) Click the `+` button in the quantity adjustment area
+	Test Data:
+		Category = Any category
+		Item = Any in-stock item
+		Quantity = 1 (to start)
+	Expected Results:
+		- The displayed quantity goes up by 1
+		- The `-` button becomes green
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC07:
+	Test Scenario:
+		A user clicks the `+` button as long as they are able to
+	Test Steps:
+		1) Select any category
+		2) Select any in-stock item
+		3) Click the `+` button in the quantity adjustment area repeatedly
+	Test Data:
+		Category = Any category (recommended: "Pizza")
+		Item = Any in-stock item (recommended: "Pepperoni Pizza")
+		Quantity = 1 (to start)
+	Expected Results:
+		- The button will let you click it until the quantity is equal to what
+			is left in stock.
+		- Once the quantity is equal to stock, the `+` button should gray out
+			and stop working.
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC08:
+	Test Scenario:
+		The user clicks the `-` button to decrease the quantity when it is at 1
+	Test Steps:
+		1) Select any category
+		2) Select any in-stock item
+		3) Press the `-` button
+	Test Data:
+		Category = Any category
+		Item = Any in-stock item
+		Quantity = 1 (to start)
+	Expected Results:
+		- Quantity doesn't change
+		- Button stays grayed out
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC09:
+	Test Scenario:
+		The user reduces quantity in cart after increasing it
+	Test Steps:
+		1) Select any category
+		2) Select any in-stock item
+		3) Press `+` 4 times to make quantity = 5
+		4) Press `-` 1 time to make quantity = 4
+		4) Press `-` 1 time to make quantity = 3
+		4) Press `-` 1 time to make quantity = 2
+		4) Press `-` 1 time to make quantity = 1
+	Test Data:
+		Category = Any category
+		Item = Any in-stock item
+		Quantity = 1 (to start)
+	Expected Results:
+		- Quantity will decrease by one for each press of the `-` button
+		- Once quantity==1, the `-` should gray out
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC10:
+	Test Scenario:
+		The user decides they no longer want the item and cancel adding the
+		item to their order
+	Test Steps:
+		1) Select any category
+		2) Select any in-stock item
+		3) Press the `Cancel` button at the bottom of the modal
+	Test Data:
+		Category = Any category
+		Item = Any in-stock item
+	Expected Results:
+		- The modal closes
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC11:
+	Test Scenario:
+		The user decides they no longer want the item and cancel adding the
+		item to their order
+	Test Steps:
+		1) Select any category
+		2) Select any in-stock item
+		3) Press anywhere that is darkened by the modal background
+	Test Data:
+		Category = Any category
+		Item = Any in-stock item
+	Expected Results:
+		- The modal closes
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC12:
+	Test Scenario:
+		The user adds the item to their order
+	Test Steps:
+		1) Select any category
+		2) Select any in-stock item
+		3) Click the `Add to Order` button at the bottom of the modal
+	Test Data:
+		Category = Any category
+		Item = Any in-stock item
+		Quantity = 1
+	Expected Results:
+		- The modal should close out and the same category that the user had
+			selected before is visible
+		- The user should see the item appear in their cart at the bottom of
+			the screen.
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC13:
+	Test Scenario:
+		The user wants to add multiple of the same item to their order at one
+		time
+	Test Steps:
+		1) Select any category
+		2) Select any in-stock item
+		3) Increase the quantity by clicking the `+` button
+		4) Click the `Add to Order` button at the bottom of the modal
+	Test Data:
+		Category = Any category
+		Item = Any in-stock item
+		Quantity = >1
+	Expected Results:
+		- The modal should close out and the same category that the user had
+			selected before is visible
+		- The user should see the item appear in their cart at the bottom of
+			the screen with the same quantity that was chosen in the modal
+			with the price multiplied by that amount for the sub-total.
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC14:
+	Test Scenario:
+		The user wants to add another item to their order that they already
+		added to the order.
+	Test Steps:
+		1) Select any category
+		2) Select any in-stock item
+		3) Click the `Add to Order` button at the bottom of the modal
+	Test Data:
+		Category = Any category
+		Item = Any in-stock item
+		Quantity = 1
+	Expected Results:
+		- The item already added in the order view gets one added to it's
+			quantity indicator, and the price multiplied accordingly
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC15:
+	Test Scenario:
+		The user wants to add another item to their order that they already
+		added to the order.
+	Test Steps:
+		1) Select any category
+		2) Select any in-stock item
+		4) Click the `Add to Order` button at the bottom of the modal
+	Test Data:
+		Category = Any category
+		Item = Any in-stock item
+		Quantity = >1
+	Expected Results:
+		- The item already added in the order view gets the value of quantity
+			added to it's quantity indicator, and the price multiplied
+			accordingly to the number added.
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC16:
+	Test Scenario:
+		The user is done ordering and wants to send their order to the kitchen
+		so that they can get their food.
+	Test Steps:
+		1) Populate the cart with some items
+		2) Click the "Place Order" button in the order summary
+	Test Data:
+		Cart = Item[] (length >= 1)
+	Expected Results:
+		- The payment method modal appears with the choices of payment
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC17:
+	Test Scenario:
+		The user changed their mind and decides to not pay yet
+	Test Steps:
+		1) Populate the cart with some items
+		2) Click the "Place Order" button in the order summary
+		3) Click anywhere outside of the payment choice modal
+	Test Data:
+		Cart = Item[] (length >= 1)
+	Expected Results:
+		- The payment choice modal disappears without losing the order information
+		- The selected category remains on what the user had it selected as
+			when they clicked "Place Order"
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC18:
+	Test Scenario:
+		The user is paying for their order.
+	Test Steps:
+		1)Populate the cart with some items
+		2) Click the "Place Order" button in the order summary
+		3) Click any of the payment options presented
+	Test Data:
+		Cart = Item[] (length >= 1)
+		Payment Option = any option presented in the modal
+	Expected Results:
+		- The order is placed with the server
+		- The order number is displayed that was received from the server
+		- The site resets itself 5 seconds after displaying the order number
+	Actual Results:
+		- The order data is sent to the API
+		- The API returns the status and the order number
+		- The order number is displayed
+		- 5 seconds later the page is reset for the next customer
+	Status: PAGE
+
+
+TC19:
+	Test Scenario:
+		The user decides they no longer want anything to eat
+	Test Steps:
+		1) Press the "Cancel Order" button in the order summary
+	Test Data:
+		N/A
+	Expected Results:
+		- The site resets all data associated with the order and doesn't send
+			anything to the server
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC20:
+	Test Scenario:
+		The user is really hungry and wants a lot to eat
+	Test Steps:
+		1) Add a bunch of unique items to the cart
+	Test Data:
+		Enough items added to the order so that they begin to flow out of the
+			box provided for them
+	Expected Results:
+		- The cart allows scrolling through the items
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC21:
+	Test Scenario:
+		The user starts to pay for their order but decides that they no longer
+		want to order anything
+	Test Steps:
+		1) Populate the cart with some items
+		2) Click the "Place Order" button in the order summary
+		3) Click the "Cancel Order" button in the payment selection
+	Test Data:
+		Cart = Item[] (length >= 1)
+	Expected Results:
+		- The payment method modal disappears and all data on the site is reset
+			to it's initial state
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC22:
+	Test Scenario:
+		The user wants to change the amount of something in their cart
+	Test Steps:
+		1) Populate the cart with some items
+		2) Click the item in the cart
+	Test Data:
+		Cart = Item[] (length >= 1)
+	Expected Results:
+		- The Item adjustment modal appears with the proper quantity of the
+			item in the field.
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC23:
+	Test Scenario:
+		The user wants to increase the amount of something in their cart
+	Test Steps:
+		1) Populate the cart with some items
+		2) Click the item in the cart
+		3) Increase the quantity of the item
+		4) Click the "Update Order" button
+	Test Data:
+		Cart = Item[] (length >= 1)
+		Quantity = 1 (to start)
+		Quantity = 2 (to end)
+	Expected Results:
+		- The modal should close
+		- The quantity in the cart bar at the bottom gets updated
+		- The subtotal in the bottom cart bar gets updated
+		- The grand total in the order summary gets updated
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC24:
+	Test Scenario:
+		The user wants to decrease the amount of something in their cart
+	Test Steps:
+		1) Populate the cart with some items
+		2) Click the item in the cart
+		3) Increase the quantity of the item
+		4) Click the "Update Order" button
+	Test Data:
+		Cart = Item[] (length >= 1)
+		Quantity = 2 (to start)
+		Quantity = 1 (to end)
+	Expected Results:
+		- The modal should close
+		- The quantity in the cart bar at the bottom gets updated
+		- The subtotal in the bottom cart bar gets updated
+		- The grand total in the order summary gets updated
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC25:
+	Test Scenario:
+		The user wants to completely remove something in their cart
+	Test Steps:
+		1) Populate the cart with some items
+		2) Click the item in the cart
+		3) Click the "Remove From Order" button
+	Test Data:
+		Cart = Item[] (length >= 1)
+		Quantity = >=1 (to start)
+		Quantity = 0 (to end)
+	Expected Results:
+		- The modal should close
+		- The item gets removed from the cart view
+		- The grand total in the order summary gets updated
+	Actual Results:
+		As expected
+	Status: PASS
+
+
+TC26:
+	Test Scenario:
+		The user goes to edit a cart item but then decides that they don't want
+		to any more.
+	Test Steps:
+		1) Populate the cart with some items
+		2) Click the item in the Cart
+		3) Click either the darkened background or the "Cancel" button
+	Test Data:
+		Cart = Item[] (length >= 1)
+		Quantity = >=1 (to start)
+	Expected Results:
+		- The modal should close
+		- Nothing about the cart changes
+	Actual Results:
+		As expected
+	Status: PASS

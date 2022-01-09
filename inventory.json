@@ -1,0 +1,210 @@
+[
+	{
+		"id": 0,
+		"name": "Fire Roasted Herbs & Duck",
+		"ingredients": [
+			"Herbs", "Spices", "Duck"
+		],
+		"category": "entree",
+		"cost": 1099,
+		"quantity": 15
+	},
+	{
+		"id": 1,
+		"name": "Baked Mustard Horse",
+		"ingredients": [
+			"Mustard", "Horse", "Paprika"
+		],
+		"category": "entree",
+		"cost": 3099,
+		"quantity": 10
+	},
+	{
+		"id": 2,
+		"name": "Raspberry and Elderberry Pancakes",
+		"ingredients": [
+			"Raspberry", "Elderberry", "Flour", "Water", "Eggs"
+		],
+		"category": "dessert",
+		"cost": 1599,
+		"quantity": 0
+	},
+	{
+		"id": 3,
+		"name": "Ginger Yogurt",
+		"ingredients": [
+			"Ginger", "Vanilla", "Yogurt"
+		],
+		"category": "drink",
+		"cost": 599,
+		"quantity": 60
+	},
+	{
+		"id": 4,
+		"name": "Caramel Fruitcake",
+		"ingredients": [
+			"Caramel", "Fruit", "Flour", "Eggs", "Icing Sugar"
+		],
+		"category": "dessert",
+		"cost": 2099,
+		"quantity": 2
+	},
+	{
+		"id": 5,
+		"name": "Braised Sour Yak",
+		"ingredients": [
+			"Yak Meat", "Lemon"
+		],
+		"category": "entree",
+		"cost": 14999,
+		"quantity": 10
+	},
+	{
+		"id": 6,
+		"name": "Pepperoni Pizza",
+		"ingredients": [
+			"Flour", "Eggs", "Yeast", "Tomato Paste", "Pepperoni", "Cheese"
+		],
+		"category": "pizza",
+		"cost": 1799,
+		"quantity": 5
+	},
+	{
+		"id": 7,
+		"name": "Orange Ice Cream",
+		"ingredients": [
+			"Artificial Orange Flavouring", "Cream"
+		],
+		"category": "dessert",
+		"cost": 499,
+		"quantity": 15
+	},
+	{
+		"id": 8,
+		"name": "Almond Fudge",
+		"ingredients": [
+			"Almonds", "Eggs", "Flour", "Cream"
+		],
+		"category": "dessert",
+		"cost": 999,
+		"quantity": 25
+	},
+	{
+		"id": 9,
+		"name": "Infused Olives & Mustard Lobster",
+		"ingredients": [
+			"Lobster", "Olives", "Butter"
+		],
+		"category": "entree",
+		"cost": 4999,
+		"quantity": 50
+	},
+	{
+		"id": 10,
+		"name": "Roasted Honey & Thyme Venisin",
+		"ingredients": [
+			"Venison", "Honey", "Thyme", "Butter"
+		],
+		"category": "entree",
+		"cost": 2500,
+		"quantity": 7
+	},
+	{
+		"id": 11,
+		"name": "Tea-Smoked Fennel & Lemon Pasta",
+		"ingredients": [
+			"Flour", "Eggs", "Green Tea", "Fennel", "Lemon"
+		],
+		"category": "entree",
+		"cost": 1550,
+		"quantity": 15
+	},
+	{
+		"id": 12,
+		"name": "Sauteed Oregano Frog",
+		"ingredients": [
+			"Frog", "Oregano", "Butter"
+		],
+		"category": "entree",
+		"cost": 2999,
+		"quantity": 5
+	},
+	{
+		"id": 13,
+		"name": "Chocolate Cake",
+		"ingredients": [
+			"Milk Chocolate", "Flour", "Eggs", "Icing Sugar"
+		],
+		"category": "dessert",
+		"cost": 699,
+		"quantity": 1
+	},
+	{
+		"id": 14,
+		"name": "Small Fries",
+		"ingredients": [
+			"Potato", "Sodium Chloride"
+		],
+		"category": "side",
+		"cost": 199,
+		"quantity": 1000
+	},
+	{
+		"id": 15,
+		"name": "Medium Fries",
+		"ingredients": [
+			"Potato", "Sodium Chloride"
+		],
+		"category": "side",
+		"cost": 299,
+		"quantity": 500
+	},
+	{
+		"id": 16,
+		"name": "Large Fries",
+		"ingredients": [
+			"Potato", "Sodium Chloride"
+		],
+		"category": "side",
+		"cost": 399,
+		"quantity": 100
+	},
+	{
+		"id": 17,
+		"name": "Curly Fries",
+		"ingredients": [
+			"Potato", "Sodium Chloride", "Paprika"
+		],
+		"category": "side",
+		"cost": 599,
+		"quantity": 100
+	},
+	{
+		"id": 18,
+		"name": "Cinnamon Pizza",
+		"ingredients": [
+			"Flour", "Eggs", "Yeast", "Tomato Paste", "Cinnamon"
+		],
+		"category": "pizza",
+		"cost": 99,
+		"quantity": 5
+	},
+	{
+		"id": 19,
+		"name": "Hawaiian Pizza",
+		"ingredients": [
+			"Flour", "Eggs", "Yeast", "Tomato Paste", "Cheese", "Pineapple", "Ham"
+		],
+		"category": "pizza",
+		"cost": 99999,
+		"quantity": 1
+	},
+	{
+		"id": 20,
+		"name": "Soy Sauce - 16L",
+		"ingredients": ["Soy"],
+		"category": "drink",
+		"cost": 299,
+		"quantity": 100
+	}
+]

@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<title>Employee Web Client</title>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="./main.js" defer></script>
+		<link rel="stylesheet" href="../public/colours.css">
+		<link rel="stylesheet" href="./style.css">
+	</head>
+	<body>
+		<div class="maximize" id="app-base">
+
+			<!-- Orders screen -->
+			<div v-if="isLoggedIn" id="orders-screen">
+				<h3 class="header-skinny marginthickleft-smallvert">
+					{{restaurantName}}
+				</h3>
+				<h1 class="header-skinny marginthickleft-smallvert">Orders</h1>
+
+				<!-- Checkbox; whether to display closed orders -->
+				<input type="checkbox"
+				id="displayclosed"
+				class="marginthickleft-smallvert"
+				v-model="displayClosedOrders">
+				<label for="displayclosed">
+					Display completed orders
+				</label>
+
+				<!-- Div holding each order div -->
+				<div id="orders">
+					<div class="order" v-for="ord in orders"
+					v-if="displayClosedOrders || ord.status !== 'Completed'">
+						<div class="order-id">Order #{{ord.id}}</div>
+						<div class="order-status side-by-side">Status: {{ord.status}}</div>
+
+						<div class="dropdown">
+							<button class="dropbtn">Change Status</button>
+							<div class="dropdown-content">
+							  <a href="#" @click="changeOrderStatus(ord.id, 'In-Progress')">In-Progress</a>
+							  <a href="#" @click="changeOrderStatus(ord.id, 'Ready')">Ready</a>
+							  <a href="#" @click="changeOrderStatus(ord.id, 'Completed')">Completed</a>
+							  <a href="#" @click="changeOrderStatus(ord.id, 'Canceled')">Canceled</a>
+							</div>
+						</div> 
+
+						<div class="order-details">
+							Order Details:
+							<div class="order-item" v-for="it in ord.items">
+								{{it.quantity}}x {{it.name}}
+							</div>
+						</div>
+						<div class="order-total">Total: {{stringifyPrice(ord.total)}}</div>
+						
+					</div>
+				</div>
+				
+			</div>
+
+			<!-- Login Screen -->
+			<div v-else id="login-screen">
+				<div id="login-box">
+					<h3
+					class="header-skinny header-nomargin center"
+					id="login-restname"
+					>
+						{{restaurantName}}
+					</h3>
+					<h1
+					class="header-skinny header-bottmargin center"
+					id="login-header"
+					>
+						Employee Login
+					</h1>
+
+					<div class="input-with-label">
+						<label for="uname">Username:</label>
+						<input
+						type="text"
+						v-model="uname"
+						@keyup.enter="loginAction" id="uname" required
+						>
+					</div>
+					<div class="input-with-label">
+						<label for="pwd">Password:</label>
+						<input 
+						type="password"
+						v-model="pwd"
+						@keyup.enter="loginAction"
+						id="pwd" required
+						>
+					</div>
+					<p v-if="isLoggedIn !== ''" id="login-error-msg">
+						{{loginErrorMessage}}
+					</p>
+
+					<button
+					@click="loginAction"
+					id="login-button"
+					type="button"
+					>
+						Login
+					</button>
+				</div>
+			</div>
+
+		</div>
+	</body>
+</html>

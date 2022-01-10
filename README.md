@@ -1,3 +1,5 @@
+# Restaurant-Ordering-System
+
 ## Goal: To enable customers to get an effective and efficient user interface for any restaurants they would visit.
 
 ## Product Description:
@@ -7,13 +9,13 @@
 - Allows management to analyze the inventory and make food items available accordingly.
 
 ## Product Architecture:
- # Server: 
+ ### Server: 
   - Written in Python with Flask as the web server framework
   - Data stored in JSON files, using the ThetaDB interface so that it can be easily swapped out in the future if needed.
   - API endpoints are designed in a RESTful manner
   - All communication between the server and client is done through JSON objects as needed.
 
- # Client:
+ ### Client:
   - Two different web clients, one for the customer kiosk and one for the employees.
   - Written in Javascript, HTML, and CSS. With Vue.js as the library used for DOM manipulation and reactivity.
   - Axios used for performing the HTTP requests to the server and parsing the responses.
